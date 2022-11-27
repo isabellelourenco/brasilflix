@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="primary">#05151b</color>
-    <color name="primary_dark">#05151b</color>
-    <color name="primary_transparent">#05151b</color>
-    <color name="primary_dark_transparent">#05151b</color>
+    <color name="primary">#1b1c23</color>
+    <color name="primary_dark">#1b1c23</color>
+    <color name="primary_transparent">#1b1c23</color>
+    <color name="primary_dark_transparent">#1b1c23</color>
+    <color name="button">#728793</color>
 </resources>

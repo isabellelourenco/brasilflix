@@ -16,7 +16,7 @@ public interface TMDbAPI {
     String IMAGE_BASE_URL_500 = "https://image.tmdb.org/t/p/w500";
     String IMAGE_BASE_URL_1280 = "https://image.tmdb.org/t/p/w1280";
 
-    String TMDb_API_KEY = "45dfdbd49fa1f1da1f5b75fd60217433";
+    String TMDb_API_KEY = "96ef1b88569c36edad9760c53c93b860";
 
     @GET(HttpClientModule.NOW_ON_PLAYING)
     Observable<ResponseNowPlaying> getNowPlaying(
@@ -30,6 +30,11 @@ public interface TMDbAPI {
             @Query("page") int page
     );
 
+    @GET(HttpClientModule.NEW_MOVIES)
+    Observable<ResponseNowPlaying> getNewMovie(
+            @Query("api_key") String api_key,
+            @Query("page") int page
+    );
 
     @GET(HttpClientModule.MOVIE_DETAILS + "{movie_id}")
     Observable<ResponseMovieDetail> getMovieDetail(
@@ -48,4 +53,5 @@ public interface TMDbAPI {
             @Path("movie_id") int movie_id,
             @Query("api_key") String api_key
     );
+
 }

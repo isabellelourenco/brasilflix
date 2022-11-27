@@ -11,6 +11,7 @@ import com.halil.ozel.moviedb.App;
 import com.halil.ozel.moviedb.R;
 import com.halil.ozel.moviedb.data.Api.TMDbAPI;
 import com.halil.ozel.moviedb.data.models.Results;
+import com.halil.ozel.moviedb.ui.home.adapters.BannerAdapter;
 import com.halil.ozel.moviedb.ui.home.adapters.MovieAdapter;
 
 import java.util.ArrayList;
@@ -40,6 +41,16 @@ public class MainActivity extends AppCompatActivity {
     public RecyclerView.LayoutManager nowPlayingLayoutManager;
     public List<Results> nowPlayingDataList;
 
+    public RecyclerView rvNewMovie;
+    public RecyclerView.Adapter newMovieAdapter;
+    public RecyclerView.LayoutManager newLayoutManager;
+    public List<Results> newMovieDataList;
+
+    public RecyclerView rvNewMovieCarousel;
+    public RecyclerView.Adapter newMovieAdapterCarousel;
+    public RecyclerView.LayoutManager newLayoutManagerCarousel;
+    public List<Results> newMovieDataListCarousel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,9 +75,28 @@ public class MainActivity extends AppCompatActivity {
         rvNowPlaying.setLayoutManager(nowPlayingLayoutManager);
         rvNowPlaying.setAdapter(nowPlayingMovieAdapter);
 
+        newMovieDataList = new ArrayList<>();
+        newMovieAdapter = new MovieAdapter(newMovieDataList, this);
+        newLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+
+        rvNewMovie = findViewById(R.id.rvNewMovie);
+        rvNewMovie.setHasFixedSize(true);
+        rvNewMovie.setLayoutManager(newLayoutManager);
+        rvNewMovie.setAdapter(newMovieAdapter);
+
+        newMovieDataListCarousel = new ArrayList<>();
+        newMovieAdapterCarousel = new BannerAdapter(newMovieDataList, this);
+        newLayoutManagerCarousel = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+
+        rvNewMovieCarousel = findViewById(R.id.rvNewMovieCarousel);
+        rvNewMovieCarousel.setHasFixedSize(true);
+        rvNewMovieCarousel.setLayoutManager(newLayoutManagerCarousel);
+        rvNewMovieCarousel.setAdapter(newMovieAdapterCarousel);
 
         getPopularMovies();
         getNowPlaying();
+        getNewMovies();
+        getNewMoviesCarousel();
     }
 
 
@@ -88,6 +118,28 @@ public class MainActivity extends AppCompatActivity {
             nowPlayingDataList.addAll(response.getResults());
 
             nowPlayingMovieAdapter.notifyDataSetChanged();
+
+        }, e -> Timber.e(e, "Error fetching now popular movies: %s", e.getMessage()));
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    public void getNewMovies() {
+        tmDbAPI.getNewMovie(TMDb_API_KEY, 1).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(response -> {
+
+            newMovieDataList.addAll(response.getResults());
+
+            newMovieAdapter.notifyDataSetChanged();
+
+        }, e -> Timber.e(e, "Error fetching now popular movies: %s", e.getMessage()));
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    public void getNewMoviesCarousel() {
+        tmDbAPI.getNewMovie(TMDb_API_KEY, 1).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(response -> {
+
+            newMovieDataListCarousel.addAll(response.getResults());
+
+            newMovieAdapterCarousel.notifyDataSetChanged();
 
         }, e -> Timber.e(e, "Error fetching now popular movies: %s", e.getMessage()));
     }

@@ -22,10 +22,10 @@ public class HttpClientModule {
 
     private static final long DISK_CACHE_SIZE = 50 * 1024 * 1024;
     public static final String TMDb_API_URL = "https://api.themoviedb.org/3/";
-    public static final String NOW_ON_PLAYING = "movie/now_playing";
-    public static final String POPULAR = "movie/popular";
+    public static final String NOW_ON_PLAYING = "https://api.themoviedb.org/3/discover/movie/?with_original_language=pt&vote_average.gte=8";
+    public static final String POPULAR = "discover/movie/?with_original_language=pt";
     public static final String MOVIE_DETAILS = "movie/";
-
+    public static final String NEW_MOVIES = "discover/movie/?with_original_language=pt&primary_release_year=2022";
 
     @Provides
     @AppScope

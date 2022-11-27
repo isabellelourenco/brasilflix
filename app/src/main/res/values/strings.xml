@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Movie DB</string>
+    <string name="brazil_movies">Brazilian Movies</string>
+    <string name="popular_brazil_movies">Popular Brazilian Movies</string>
+    <string name="new_brazil_movies">New Brazilian Movies</string>
+    <string name="logo_app">BrasilFlix</string>
+
 </resources>

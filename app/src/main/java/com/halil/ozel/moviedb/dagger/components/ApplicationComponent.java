@@ -1,6 +1,7 @@
 package com.halil.ozel.moviedb.dagger.components;
 
 import com.halil.ozel.moviedb.App;
+import com.halil.ozel.moviedb.ui.home.adapters.BannerAdapter;
 import com.halil.ozel.moviedb.ui.home.adapters.MovieAdapter;
 import com.halil.ozel.moviedb.dagger.AppScope;
 import com.halil.ozel.moviedb.dagger.modules.ApplicationModule;
@@ -35,5 +36,5 @@ public interface ApplicationComponent {
 
     void inject(MovieCastAdapter movieCastAdapter);
 
-
+    void inject(BannerAdapter bannerAdapter);
 }
